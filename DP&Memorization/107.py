@@ -1,0 +1,24 @@
+"""
+107. Word Break"""
+class Solution:
+    """
+    @param s: A string
+    @param wordSet: A dictionary of words dict
+    @return: A boolean
+    """
+    def wordBreak(self, s, wordSet):
+        # write your code here
+        n = len(s)
+
+        dp = [False] * (n + 1)
+        dp[0] = True
+
+        for i in range(1, n + 1):
+            for length in range(1, i + 1):
+                if not dp[i - length]:
+                    continue
+                if s[i - length: i] in wordSet:
+                    dp[i] = True
+                    break
+
+        return dp[-1]

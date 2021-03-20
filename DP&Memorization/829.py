@@ -20,7 +20,7 @@ class Solution:
                 return self.isMatch(pattern[1:], string[len(word):], map, used)
             else:
                 return False
-
+        
         for length in range(len(string)):
             word = string[:length + 1]
             if word in used:
