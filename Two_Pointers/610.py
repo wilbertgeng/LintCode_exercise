@@ -23,3 +23,31 @@ class Solution:
                 return [nums[i], nums[j]]
 
         return [-1, -1]
+        ###
+        ### no hash table
+        if not nums:
+            return [-1, -1]
+        target = abs(target)
+        n = len(nums)
+        for i in range(n - 1):
+            j = self.binarySearch(nums, i + 1, n - 1, target + nums[i])
+            if j == -1:
+                continue
+            return [nums[i], nums[j]]
+
+        return [-1, -1]
+
+    def binarySearch(self, nums, start, end, target):
+        while start + 1 < end:
+            mid = (start + end) // 2
+            if nums[mid] < target:
+                start = mid
+            else:
+                end = mid
+
+        if nums[start] == target:
+            return start
+        if nums[end] == target:
+            return end
+
+        return -1
