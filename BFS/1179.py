@@ -8,6 +8,34 @@ class Solution:
     """
     def findCircleNum(self, M):
         # Write your code here
+        #### Practice:
+        if not M:
+            return 0
+
+        visited = set()
+        cnt = 0
+        for x in range(len(M)):
+            if x not in visited:
+                visited.add(x)
+                self.bfs(x, M, visited)
+                cnt += 1
+
+        return cnt
+
+    def bfs(self, x, M, visited):
+        queue = collections.deque([x])
+        while queue:
+            i = queue.popleft()
+            for j in range(len(M)):
+                if M[i][j] == 1 and j not in visited:
+                    visited.add(j)
+                    queue.append(j)
+
+
+
+
+
+        ###
         if not M:
             return 0
         visited = set()
