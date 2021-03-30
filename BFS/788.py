@@ -29,8 +29,9 @@ class Solution:
                     if (i_new, j_new) not in steps:
                         steps[(i_new, j_new)] = steps[(i, j)] + abs(i_new - i + j_new - j)
                         queue.append((i_new, j_new))
-                    else:
-                        steps[(i_new, j_new)] = min(steps[(i_new, j_new)], steps[(i, j)] + abs(i_new - i + j_new - j))
+                    if steps[(i_new, j_new)] > steps[(i, j)] + abs(i_new - i + j_new - j): #如果发现了最短路径 需要写入queue重新计算
+                        steps[(i_new, j_new)] = steps[(i, j)] + abs(i_new - i + j_new - j)
+                        queue.append((i_new, j_new))
         if tuple(destination) in steps:
             return steps[tuple(destination)]
         return -1
