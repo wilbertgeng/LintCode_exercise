@@ -29,3 +29,8 @@ class Solution:
             res += A[i:]
 
         return res
+"""
+merge lists (LinkedList: in place)
+merge arrays (Space: O(n))
+
+"""

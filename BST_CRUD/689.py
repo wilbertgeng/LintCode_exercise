@@ -18,10 +18,30 @@ class Solution:
         # write your code here
         if not root:
             return None
+        res = []
+        nodes = set()
+        self.dfs(root, n, nodes, res)
+        return res[0]
+
+    def dfs(self, node, target, nodes, res):
+        if not node:
+            return
+
+        self.dfs(node.left, target, nodes, res)
+        if target - node.val not in nodes:
+            nodes.add(node.val)
+        else:
+            res.append([target - node.val, node.val])
+
+        self.dfs(node.right, target, nodes, res)
+
+        ###
+        if not root:
+            return None
         self.res = []
         nodes = set()
         self.dfs(root, n, nodes)
-        return self.res
+        return res[0]
 
     def dfs(self, node, target, nodes):
         if not node:
@@ -31,6 +51,6 @@ class Solution:
         if target - node.val not in nodes:
             nodes.add(node.val)
         else:
-            self.res = [node.val, target - node.val]
+            res.append([target - node.val, node.val])
 
         self.dfs(node.right, target, nodes)

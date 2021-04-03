@@ -7,6 +7,60 @@ class Solution:
     """
     def subsets(self, nums):
         # write your code here
+        res = []
+        n = len(nums)
+        nums.sort()
+        for i in range(1 << n):
+            subset = []
+            for j in range(n):
+                if (i & (1 << j)) != 0:
+                    subset.append(nums[j])
+            res.append(subset)
+
+        return res
+
+
+        ### BFS1 practice
+        res = []
+        queue = [[]]
+        index = 0
+
+        while index < len(queue):
+            subset = queue[index]
+            index += 1
+            for num in nums:
+                if subset and num <= subset[-1]:
+                    continue
+                queue.append(subset + [num])
+        return queue
+
+        ### BFS 2 practice
+        nums.sort()
+        res = [[]]
+
+        for i in range(len(nums)):
+            for j in range(len(res)):
+                res.append(res[j] + [nums[i]])
+
+        return res
+
+        ### DFS practice:
+        res = []
+        nums.sort()
+        self.dfs(nums, 0, [], res)
+        return res
+
+    def dfs(self, nums, index, path, res):
+        res.append(list(path))
+        if index == len(nums):
+            return
+
+        for i in range(index, len(nums)):
+            path.append(nums[i])
+            self.dfs(nums, i + 1, path, res)
+            path.pop()
+
+
         ### BFS 1:
         queue = [[]]
         index = 0
