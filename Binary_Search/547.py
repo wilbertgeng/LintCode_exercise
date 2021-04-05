@@ -8,6 +8,7 @@ class Solution:
     """
     def intersection(self, nums1, nums2):
         # write your code here
+        ## O(n)
         m = len(nums1)
         n = len(nums2)
 
@@ -18,4 +19,11 @@ class Solution:
                 res.add(nums2[i])
 
         return list(res)
-            
+
+        # sort + binary search
+        nums1.sort()
+        for num in nu
+
+
+        # sort + two pointers
+        

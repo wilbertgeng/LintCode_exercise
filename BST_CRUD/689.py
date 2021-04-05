@@ -41,7 +41,7 @@ class Solution:
         self.res = []
         nodes = set()
         self.dfs(root, n, nodes)
-        return res[0]
+        return self.res
 
     def dfs(self, node, target, nodes):
         if not node:
@@ -51,6 +51,6 @@ class Solution:
         if target - node.val not in nodes:
             nodes.add(node.val)
         else:
-            res.append([target - node.val, node.val])
+            self.res = [target - node.val, node.val]
 
         self.dfs(node.right, target, nodes)
