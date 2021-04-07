@@ -7,6 +7,15 @@ class Solution:
     """
     def isMatch(self, s, p):
         # write your code here
+        ### DP
+        
+
+
+
+
+
+
+        ### DFS Memorization
         return self.isMatchHelper(s, 0, p, 0, {})
 
     def isMatchHelper(self, s, i, p, j, memo):
