@@ -7,8 +7,30 @@ class Solution:
     """
     def isMatch(self, s, p):
         # write your code here
-        ### DP
-        
+        ### DP 错误答案！！
+        m = len(s)
+        n = len(p)
+
+        dp = [[False] * (n + 1) for _ in range(m + 1)]
+        dp[0][0] = True
+
+        for j in range(1, n + 1):
+            if j >= 2:
+                dp[0][j] = dp[0][j - 2] and p[j - 1] == "*"
+            else:
+                dp[0][j] = p[j - 1] == "*"
+
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if p[j - 1] == "*":
+                    dp[i][j] = self.isMatch(s, p, i - 1, j - 2) and dp[i - 1][j - 2]
+                else:
+                    dp[i][j] = self.isMatch(s, p, i - 1, j - 1) and dp[i - 1][j - 1]
+
+        return dp[m][n]
+
+    def isMatch(self, s, p, x, y):
+        return s[x] == p[y] or p[y] == "."
 
 
 
