@@ -18,6 +18,43 @@ class Solution:
     """
     def lowestCommonAncestor3(self, root, A, B):
         # write your code here
+        #### Practice:
+        existA, existB, node = self.dfs(root, A, B)
+        if existA and existB:
+            return node
+        return None
+
+    def dfs(self, node, a, b):
+        if not node:
+            return False, False, None
+
+        existA_L, existB_L, node_L = self.dfs(node.left, a, b)
+        existA_R, existB_R, node_R = self.dfs(node.right, a, b)
+
+        existA, existB = False, False
+
+        if existA_L or existA_R or node == a:
+            existA = True
+        if existB_L or existB_R or node == b:
+            existB = True
+
+        if node == a or node == b:
+            return existA, existB, node
+
+        if node_L and node_R:
+            return True, True, node
+
+        if node_L:
+            return existA, existB, node_L
+        if node_R:
+            return existA, existB, node_R
+        return existA, existB, None
+
+
+
+
+
+        #####
         a_exist, b_exist, LCA = self.helper(root, A, B)
         if a_exist and b_exist:
             return LCA
@@ -44,6 +81,22 @@ class Solution:
         if right_node:
             return node_a_exist, node_b_exist, right_node
         return node_a_exist, node_b_exist, None
+
+
+
+        ### this works only when two nodes are garanteed to exist
+        if not root or root == A or root == B:
+            return root
+
+        left = self.lowestCommonAncestor3(root.left, A, B)
+        right = self.lowestCommonAncestor3(root.right, A, B)
+
+        if left and right:
+            return root
+
+        return left or right
+
+
 
 
 

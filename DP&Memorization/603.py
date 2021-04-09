@@ -7,6 +7,56 @@ class Solution:
     """
     def largestDivisibleSubset(self, nums):
         # write your code here
+        ###
+        if not nums:
+            return []
+
+        nums.sort()
+        dp = {}
+        prev = {}
+        for num in nums:
+            dp[num] = 1
+            prev[num] = -1
+
+        last_num = nums[0]
+        longest = 0
+        for num in nums:
+            for factor in self.getFactors(num):
+                if factor not in dp:
+                    continue
+                if dp[factor] + 1 > dp[num]:
+                    dp[num] = dp[factor] + 1
+                    prev[num] = factor
+                if dp[num] > longest:
+                    last_num = num
+                    longest = dp[num]
+
+        return self.getPath(last_num, prev)
+
+    def getPath(self, num, prev):
+        res = []
+        while num != -1:
+            res.append(num)
+            num = prev[num]
+
+        return res[::-1]
+
+
+    def getFactors(self, num):
+        if num == 1:
+            return []
+        factors = []
+        factor = 1
+        while factor * factor <= num:
+            if num % factor == 0:
+                factors.append(factor)
+                if factor * factor != num and factor != 1:
+                    factors.append(num // factor)
+            factor += 1
+
+        return factors
+
+        #####
         if not nums:
             return 0
 

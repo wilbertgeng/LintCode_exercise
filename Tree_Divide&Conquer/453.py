@@ -15,11 +15,39 @@ class Solution:
     """
     def flatten(self, root):
         # write your code here
+        if not root:
+            return None
+
+        self.dfs(root)
+
+    def dfs(self, node):
+        if not node:
+            return None
+
+        last_left_node = self.dfs(node.left)
+        last_right_node = self.dfs(node.right)
+
+        if node.left:
+            last_left_node.right = node.right
+            node.right = node.left
+            node.left = None
+
+        return last_right_node or last_left_node or node 
+
+
+
+
+
+
+
+
+
+        ######
         self.flatten_and_return_last_node(root)
 
     def flatten_and_return_last_node(self, node):
         if not node:
-            return None 
+            return None
 
         last_left_node = self.flatten_and_return_last_node(node.left)
         last_right_node = self.flatten_and_return_last_node(node.right)
