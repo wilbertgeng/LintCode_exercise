@@ -9,19 +9,21 @@ class Solution:
     def isPalindrome(self, s):
         # write your code here
         ## Practice
-        left = 0
-        right = len(s) - 1
+        if not s:
+            return True
 
-        while left < right:
-            while left < right and not s[l].isalnum():
-                left += 1
-            while left < right and not s[r].isalnum():
-                right -= 1
-            if s[left].lower() != s[right].lower():
+        start = 0
+        end = len(s) - 1
+
+        while start < end:
+            while start < end and not s[start].isalnum():
+                start += 1
+            while start < end and not s[end].isalnum():
+                end -= 1
+            if s[start].lower() != s[end].lower():
                 return False
-            left += 1
-            right -= 1
-
+            start += 1
+            end -= 1
         return True
 
 

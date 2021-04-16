@@ -8,19 +8,18 @@ class Solution:
     def longestPalindrome(self, s):
         # write your code here
         ### Practice:
-        if not s:
-            return 0
         d = {}
 
         for l in s:
             d[l] = d.get(l, 0) + 1
+        length = 0
+        for l in d:
+            if d[l] % 2 == 0:
+                length += d[l]
+            else:
+                length += d[l] - 1
 
-        ans = 0
-        for value in d.values():
-            ans += value // 2 * 2
-
-        return ans if ans == len(s) else ans + 1
-
+        return length + 1 if length != len(s) else length
 
 
 
