@@ -19,4 +19,5 @@ class Solution:
             B0 = max(B0, - price)
 
         return A1
+
         

@@ -9,6 +9,21 @@ class Solution:
     def twoSum5(self, nums, target):
         # write your code here
         ### Practice:
+        res = 0
+        if not nums:
+            return 0
+
+        nums.sort()
+        r = len(nums) - 1
+        for l in range(len(nums) - 1):
+            while nums[l] + nums[r] > target and r > l:
+                r -= 1
+            if nums[l] + nums[r] <= target:
+                res += r - l
+
+        return res 
+
+        ### Practice:
         if not nums:
             return 0
 

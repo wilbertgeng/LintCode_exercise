@@ -10,6 +10,50 @@ class Solution:
     """
     def kClosestNumbers(self, A, target, k):
         # write your code here
+        ## Practice:
+        start = 0
+        end = len(nums) - 1
+
+        while start + 1 < end:
+            mid = (start + end) // 2
+            if nums[mid] < target:
+                start = mid
+            else:
+                end = mid
+
+        return self.findKClosest(k, start, nums, target)
+
+    def findKClosest(self, k, idx, nums, target):
+        res = []
+        l = idx
+        r = idx + 1
+        for _ in range(k):
+            if self.leftCloser(l, r, nums, target):
+                res.append(nums[l])
+                l -= 1
+            else:
+                res.append(nums[r])
+                r += 1
+        return res
+
+    def leftCloser(self, l, r, nums, target):
+        if r >= len(nums):
+            return True
+        if l < 0:
+            return False
+
+        return abs(nums[l] - target) <= abs(nums[r] - target)
+
+
+
+
+
+
+
+
+
+
+        ####
         res = []
         right = self.findClosest(A, target)
         left = right - 1

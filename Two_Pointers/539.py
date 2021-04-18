@@ -6,6 +6,25 @@ class Solution:
     """
     def moveZeroes(self, nums):
         # write your code here
+        ## Practice:
+        l = 0
+        r = 0
+        n = len(nums)
+
+        while r < n:
+            if r < n and nums[r] != 0:
+                nums[l], nums[r] = nums[r], nums[l]
+                l += 1
+            r += 1
+
+        while l < n:
+            if nums[l] != 0:
+                nums[l] = 0
+            l += 1
+
+
+
+        #####
         left = right = 0
         while right < len(nums):
             if nums[right] != 0:

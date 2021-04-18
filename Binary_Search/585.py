@@ -9,6 +9,22 @@ class Solution:
         # write your code here
         ### Practice:
         if not nums:
+            return None
+
+        start = 0
+        end = len(nums) - 1
+        while start + 1 < end:
+            mid = (start + end) // 2
+            if nums[mid] < nums[mid + 1]:
+                start = mid
+            else:
+                end = mid
+
+        return max(nums[start], nums[end])
+
+
+        ### Practice:
+        if not nums:
             return -1
 
         start = 0

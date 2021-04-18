@@ -6,6 +6,43 @@ class Solution:
     @return: Find all unique triplets in the array which gives the sum of zero.
     """
     def threeSum(self, numbers):
+        ### Practice:
+        numbers.sort()
+        ans = []
+        visited = set()
+        for i in range(len(numbers) - 2):
+            if i > 0 and numbers[i] == numbers[i - 1]:
+                continue
+            two_sum = self.twoSum(numbers[i + 1:], - numbers[i], visited)
+            if two_sum:
+                for two_num in two_sum:
+                    ans.append([numbers[i]] + two_num)
+
+        return ans
+
+    def twoSum(self, nums, target, visited):
+        if not nums:
+            return []
+        res = []
+        l = 0
+        r = len(nums) - 1
+        while l < r:
+            while l < r and nums[l] + nums[r] < target:
+                l += 1
+            while l < r and nums[l] + nums[r] > target:
+                r -= 1
+            if l < r and nums[l] + nums[r] == target:
+                if (nums[l], nums[r]) not in visited:
+                    res.append([nums[l], nums[r]])
+                    visited.add((nums[l], nums[r]))
+                l += 1
+                r -= 1
+
+
+        return res 
+
+
+
         ###  Practice:
         numbers.sort()
         res = []
