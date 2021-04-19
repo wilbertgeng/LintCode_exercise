@@ -17,6 +17,43 @@ class Solution:
     """
     def shortestPath(self, grid, source, destination):
         # write your code here
+        ## Practice:
+        if not grid or grid[source.x][source.y] == 1:
+            return -1
+        if source.x == destination.x and source.y == destination.y:
+            return 0
+
+        self.directions = [(1, 2), (1, -2), (-1, 2), (-1, -2), (2, 1), (-2, 1), (2, -1), (-2, -1)]
+        queue = collections.deque([(source.x, source.y)])
+        steps = {(source.x, source.y): 0}
+
+
+        while queue:
+            i, j = queue.popleft()
+            if i == destination.x and j == destination.y:
+                return steps[(i, j)]
+            for dx, dy in self.directions:
+                x = i + dx
+                y = j + dy
+                if not self.isValid(x, y, grid, steps):
+                    continue
+                steps[(x, y)] = steps[(i, j)] + 1
+                queue.append((x, y))
+
+        return -1
+
+    def isValid(self, i, j, grid, steps):
+        m = len(grid)
+        n = len(grid[0])
+        if i < 0 or i >= m or j < 0 or j >= n or grid[i][j] == 1 or (i, j) in steps:
+            return False
+
+        return True
+
+
+
+
+        ####
         if not grid or grid[destination.x][destination.y] == 1:
             return -1
         if source.x == destination.x and source.y == destination.y:
