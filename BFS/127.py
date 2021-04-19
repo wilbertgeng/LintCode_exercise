@@ -15,6 +15,32 @@ class Solution:
     """
     def topSort(self, graph):
         # write your code here
+        ## Practice:
+        indegree = self.getIndegree(graph)
+        start_nodes = [node for node in graph if indegree[node] == 0]
+        queue = collections.deque(start_nodes)
+
+        order = []
+        while queue:
+            node = queue.popleft()
+            order.append(node)
+            for neighbor in node.neighbors:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    queue.append(neighbor)
+        return order
+
+    def getIndegree(self, graph):
+        indegree = {n: 0 for n in graph}
+
+        for node in graph:
+            for neighbor in node.neighbors:
+                indegree[neighbor] += 1
+        return indegree
+
+
+
+        ###
         nodes_indegree = self.getIndegree(graph)
         start_nodes = collections.deque([n for n in graph if nodes_indegree[n] == 0])
         order = []
