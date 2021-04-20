@@ -14,6 +14,34 @@ class Solution:
     """
     def findSubtree(self, root):
         # write your code here
+        ## Practice:
+        node_min, node_sum, node_sum_min = self.treeSum(root)
+        return node_min
+
+    def treeSum(self, node):
+        if not node:
+            return None, 0, float('inf')
+
+        node_left, left_sum, left_sum_min = self.treeSum(node.left)
+        node_right, right_sum, right_sum_min = self.treeSum(node.right)
+
+        node_sum = node.val + left_sum + right_sum
+
+        if min(left_sum_min, right_sum_min, node_sum) == left_sum_min:
+            return node_left, node_sum, left_sum_min
+        if min(left_sum_min, right_sum_min, node_sum) == right_sum_min:
+            return node_right, node_sum, right_sum_min
+        return node, node_sum, node_sum
+
+
+
+
+
+
+
+
+
+        ######
         root_min, sum_sub, sum_min = self.getTreeSum(root)
         return root_min
 

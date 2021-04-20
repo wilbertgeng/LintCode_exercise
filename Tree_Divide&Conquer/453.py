@@ -15,6 +15,31 @@ class Solution:
     """
     def flatten(self, root):
         # write your code here
+        ### Practice
+        return self.dfs(root)
+
+    def dfs(self, node):
+        if not node:
+            return None
+        last_node_left = self.dfs(node.left)
+        last_node_right = self.dfs(node.right)
+        if node.left:
+            last_node_left.right = node.right
+            node.right = node.left
+            node.left = None
+
+        return last_node_right or last_node_left or node
+
+
+
+
+
+
+
+
+
+
+        ##
         if not root:
             return None
 
@@ -32,7 +57,7 @@ class Solution:
             node.right = node.left
             node.left = None
 
-        return last_right_node or last_left_node or node 
+        return last_right_node or last_left_node or node
 
 
 

@@ -18,6 +18,35 @@ class Solution:
     """
     def lowestCommonAncestor(self, root, A, B):
         # write your code here
+        ### Practice:
+
+        return self.dfs(root, A, B)
+
+    def dfs(self, node, a, b):
+        if not node:
+            return None 
+        if node == a or node == b:
+            return node
+
+        left = self.dfs(node.left)
+        right = self.dfs(node.right)
+
+        if not left and not right:
+            return None
+
+        if left and right:
+            return node
+
+        return left or right
+
+
+
+
+
+
+
+
+        ##
         if not root:
             return None
         if root == A or root == B:

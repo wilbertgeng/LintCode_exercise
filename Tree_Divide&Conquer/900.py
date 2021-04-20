@@ -16,6 +16,27 @@ class Solution:
     """
     def closestValue(self, root, target):
         # write your code here
+        ### Practice:
+        up = root
+        low = root
+
+        while root:
+            if root.val > target:
+                up = root
+                root = root.left
+            elif root.val < target:
+                low = root
+                root = root.right
+            else:
+                return root.val
+
+        if abs(up.val - target) < abs(target - low.val):
+            return up.val
+        return low.val
+
+
+
+
         ##### Iteration with upper and lower bound
         upper = root
         lower = root
@@ -30,9 +51,9 @@ class Solution:
             else:
                 return root.val
 
-        if (upper.val - target) < (target - lower):
+        if (upper.val - target) < (target - lower.val):
             return upper.val
-        return lower.val 
+        return lower.val
 
 
 
