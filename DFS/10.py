@@ -6,6 +6,36 @@ class Solution:
     """
     def stringPermutation2(self, str):
         # write your code here
+        if not str:
+            return [""]
+
+        res = []
+        str = list(str)
+        str.sort()
+        self.dfs(str, [], res)
+
+        return res
+
+    def dfs(self, s, path, res):
+        if not s:
+            path = "".join(path)
+            res.append(path)
+            return 
+
+        for i in range(len(s)):
+            if i > 0 and s[i] == s[i - 1]:
+                continue
+            path.append(s[i])
+            self.dfs(s[:i] + s[i + 1:], path, res)
+            path.pop()
+
+
+
+
+
+
+
+        ####
         str = list(str)
         str.sort()
 .

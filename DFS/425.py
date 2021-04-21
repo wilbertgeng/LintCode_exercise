@@ -7,6 +7,25 @@ class Solution:
     """
     def letterCombinations(self, digits):
         # write your code here
+        ## Practice:
+        digits_map = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
+        if not digits:
+            return []
+        res = []
+        self.dfs(digits, 0, "", res, digits_map)
+        return res
+
+    def dfs(self, digits, idx, path, res, digits_map):
+        if idx == len(digits):
+            res.append(path)
+            return
+
+        for l in digits_map[digits[idx]]:
+            self.dfs(digits, idx + 1, path + l, res, digits_map)
+
+
+
+        ###
         digits_map = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
 
         if not digits:

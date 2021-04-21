@@ -6,6 +6,38 @@ class Solution:
     @return: A list of lists of integers
     """
     def combinationSum(self, candidates, target):
+        ## Practice：
+        candidates.sort()
+        res = []
+        if not candidates:
+            return []
+
+        self.dfs(candidates, [], 0, target, res)
+        return res
+
+    def dfs(self, nums, path, s, target, res):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+        if s == target:
+            res.append(list(path))
+            return
+
+        for i in range(len(nums)):
+            if i > 0 and s[i] == s[i - 1]:
+                continue
+            if s + nums[i] > target:
+                break
+            path.append(nums[i])
+            self.dfs(nums[i:], path, s + nums[i], target, res)
+            path.pop()
+
+
+
+
+
+
+
+
         # write your code here
         candidates.sort()
         res = []
