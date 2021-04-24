@@ -7,6 +7,46 @@ class Solution:
     """
     def subsets(self, nums):
         # write your code here
+        if not nums:
+            return [[]]
+        nums.sort()
+        res = []
+        self.dfs(nums, 0, [], res)
+        return res
+
+    def dfs(self, nums, idx, path, res):
+        if idx == len(nums):
+            res.append(list(path))
+            return
+
+        res.append(list(path))
+        for i in range(idx, len(nums)):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            path.append(nums[i])
+            self.dfs(nums, i + 1, path, res)
+            path.pop()
+
+        #### Iteration
+        if not nums:
+            return [[]]
+
+        res = [[]]
+        nums.sort()
+        for i in range(len(nums)):
+            for j in range(len(res)):
+                ele = list(res[j])
+                res.append(ele + [nums[i]])
+        return res
+
+
+
+
+
+
+
+
+        ###
         res = []
         n = len(nums)
         nums.sort()
