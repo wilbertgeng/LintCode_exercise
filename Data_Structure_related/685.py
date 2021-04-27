@@ -8,6 +8,29 @@ class Solution:
     """
     def firstUniqueNumber(self, nums, number):
         # Write your code here
+        ### Practice：
+        counter = {}
+        for num in nums:
+            counter[num] = counter.get(num, 0) + 1
+            if num == number:
+                break
+        else:
+            return -1
+
+        for num in nums:
+            if counter[num] == 1:
+                return num
+            if num == number:
+                break
+        return -1
+
+
+
+
+
+
+
+        ####
         counter = {}
         for num in nums:
             counter[num] = counter.get(num, 0) + 1

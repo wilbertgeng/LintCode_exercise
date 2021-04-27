@@ -7,6 +7,23 @@ class Solution:
     """
     def nthUglyNumber(self, n):
         # write your code here
+        import heapq
+        heap = [1]
+        visited = set()
+        for i in range(n):
+            val = heapq.heappop(heap)
+            for factor in [2, 3, 5]:
+                if val * factor not in visited:
+                    visited.add(val * factor)
+                    heapq.heappush(heap, factor * val)
+
+        return val
+
+
+
+
+
+        ###
         heap = [1]
         visited = set([1])
 
