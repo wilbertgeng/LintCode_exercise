@@ -8,6 +8,34 @@ class Solution:
     """
     def wordBreak3(self, s, dict):
         # Write your code here
+        ## Practice:
+        lower_dict = set()
+        for word in dict:
+            lower_dict.add(word.lower())
+        memo = {}
+        s = s.lower()
+        return self.dfs(0, s, lower_dict, memo)
+
+    def dfs(self, idx, s, dict, memo):
+        if idx == len(s):
+            return 1
+        res = 0
+        for i in range(idx, len(s)):
+            prefix = s[idx: i + 1]
+            if prefix not in dict:
+                continue
+            res += self.dfs(i + 1, s, dict, memo)
+
+        memo[s[idx:]] = res
+        return res
+
+
+
+
+
+
+
+        #####
         lower_dict = set()
         for word in dict:
             lower_dict.add(word.lower())

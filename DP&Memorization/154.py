@@ -7,7 +7,8 @@ class Solution:
     """
     def isMatch(self, s, p):
         # write your code here
-        ### DP 错误答案！！
+
+        ### DP practice:
         m = len(s)
         n = len(p)
 
@@ -15,22 +16,57 @@ class Solution:
         dp[0][0] = True
 
         for j in range(1, n + 1):
-            if j >= 2:
-                dp[0][j] = dp[0][j - 2] and p[j - 1] == "*"
-            else:
-                dp[0][j] = p[j - 1] == "*"
+            if p[j - 1] == "*":
+                dp[0][j] = dp[0][j - 2]
 
         for i in range(1, m + 1):
             for j in range(1, n + 1):
                 if p[j - 1] == "*":
-                    dp[i][j] = self.isMatch(s, p, i - 1, j - 2) and dp[i - 1][j - 2]
+                    dp[i][j] = dp[i][j - 2]
+                    if s[i - 1] == p[j - 2] or p[j - 2] == ".":
+                        dp[i][j] = dp[i - 1][j] or dp[i][j]
                 else:
-                    dp[i][j] = self.isMatch(s, p, i - 1, j - 1) and dp[i - 1][j - 1]
+                    if s[i - 1] == p[j - 1] or p[j - 1] == ".":
+                        dp[i][j] = dp[i - 1][j - 1]
 
-        return dp[m][n]
+        return dp[-1][-1]
 
-    def isMatch(self, s, p, x, y):
-        return s[x] == p[y] or p[y] == "."
+
+
+        ## DFS memorization practice:
+        return self.dfs(s, 0, p, 0, {})
+
+    def dfs(self, s, s_idx, p, p_idx, memo):
+        if (s_idx, p_idx) in memo:
+            return memo[(s_idx, p_idx)]
+
+        if s_idx == len(s):
+            return self.isEmpty(p[p_idx:])
+
+        if p_idx == len(p):
+            return False
+
+        if p_idx + 1 < len(p) and p[p_idx + 1] == "*":
+            match = self.isCharMatch(s, s_idx, p, p_idx) and self.dfs(s, s_idx + 1, p, p_idx, memo) or self.dfs(s, s_idx, p, p_idx + 2, memo)
+        else:
+            match = self.isCharMatch(s, s_idx, p, p_idx) and self.dfs(s, s_idx + 1, p, p_idx + 1, memo)
+
+        memo[(s_idx, p_idx)] = match
+
+        return match
+
+    def isCharMatch(self, s, s_idx, p, p_idx):
+        return s[s_idx] == p[p_idx] or p[p_idx] == "."
+
+    def isEmpty(self, p):
+        if len(p) % 2 == 1:
+            return False
+
+        for i in range(len(p) // 2):
+            if p[i * 2 + 1] != "*":
+                return False
+        return True
+
 
 
 
