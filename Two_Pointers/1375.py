@@ -8,6 +8,49 @@ class Solution:
     """
     def kDistinctCharacters(self, s, k):
         # Write your code here
+        n = len(s)
+        if n < k:
+            return 0
+
+        cnt = 0
+        store = set()
+        for i in range(n - k + 1):
+            store.add(s[i])
+            j = i + 1
+            while len(store) < k and j < n:
+                store.add(s[j])
+                j += 1
+            if len(store) >= k:
+                cnt += n - j + 1
+            store = set()
+        return cnt
+
+        ## optimize
+        n = len(s)
+        if n < k:
+            return 0
+
+        cnt = {}
+        ans = 0
+        j = 0
+        for i in range(n):
+            while len(cnt) < k and j < n:
+                cnt[s[j]] = cnt.get(s[j], 0) + 1
+                j += 1
+
+            if len(cnt) >= k:
+                ans += n - j + 1
+            cnt[s[i]] -= 1
+            if cnt[s[i]] == 0:
+                del cnt[s[i]]
+
+        return ans
+
+
+
+
+
+        ###
         if len(set(s)) < k:
             return 0
 

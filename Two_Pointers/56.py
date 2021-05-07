@@ -8,6 +8,21 @@ class Solution:
     """
     def twoSum(self, numbers, target):
         # write your code here
+
+
+        ###
+        d = {}
+
+        for i, num in enumerate(numbers):
+            if target - num not in d:
+                d[num] = i
+            else:
+                return [d[target - num], i]
+        return [-1, -1]
+
+
+
+
         ## HashMap O(n) O(n)
         d = {}
 

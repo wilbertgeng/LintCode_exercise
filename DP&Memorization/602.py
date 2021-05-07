@@ -7,9 +7,33 @@ class Solution:
     def maxEnvelopes(self, envelopes):
         # write your code here
         ### Practice:
-        
+        if not envelopes:
+            return 0
+        envelopes.sort(key=lambda x: (x[0], -x[1]))
 
+        n = len(envelopes)
+        rank = [float('inf')] * (n + 1)
+        rank[0] = float('-inf')
+        longest = 1
+        for w, h in envelopes:
+            index = self.gte(rank, h)
+            rank[index] = h
+            longest = max(longest, index)
 
+        return longest
+
+    def gte(self, nums, target):
+        start = 0
+        end = len(nums) - 1
+        while start + 1 < end:
+            mid = (start + end) // 2
+            if nums[mid] < target:
+                start = mid
+            else:
+                end = mid
+        if nums[start] == target:
+            return start
+        return end 
 
 
 

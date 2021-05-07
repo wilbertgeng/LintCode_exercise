@@ -10,6 +10,26 @@ class Solution:
     """
     def mergeSortedArray(self, A, m, B, n):
         # write your code here
+        pt1 = m - 1
+        pt2 = n - 1
+        pt = m + n - 1
+        while pt1 != -1 and pt2 != -1:
+            if A[pt1] >= B[pt2]:
+                A[pt] = A[pt1]
+                pt1 -= 1
+            else:
+                A[pt] = B[pt2]
+                pt2 -= 1
+            pt -= 1
+
+        if pt2 >= 0:
+            A[:pt2 + 1] = B[:pt2 + 1]
+
+
+
+
+
+        ###
 
         while m > 0 and n > 0:
             if A[m - 1] >= B[n - 1]:

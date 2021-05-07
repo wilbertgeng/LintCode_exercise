@@ -7,6 +7,21 @@ class Solution:
     """
     def stringCount(self, str):
         # Write your code here.
+        ## Practice:
+        cnt = 0
+        j = 1
+        for i in range(len(str)):
+            if str[i] != "0":
+                j += 1
+                continue
+            while j < len(str) and str[j] == "0":
+                j += 1
+            cnt += j - i
+
+        return cnt
+
+
+        ##
         if not str:
             return 0
         j = 1

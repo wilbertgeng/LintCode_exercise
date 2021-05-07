@@ -8,6 +8,15 @@ class Solution:
     """
     def characterReplacement(self, s, k):
         # write your code here
+        
+
+
+
+
+
+
+
+        ###
         counter = {}
         max_freq = 0
         j = 0
