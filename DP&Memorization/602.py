@@ -6,6 +6,16 @@ class Solution:
     """
     def maxEnvelopes(self, envelopes):
         # write your code here
+        ### Practice:
+        
+
+
+
+
+
+
+
+        ######
         if not envelopes:
             return 0
 

@@ -6,6 +6,34 @@ class Solution:
     """
     def longestIncreasingSubsequence(self, nums):
         # write your code here
+        ### Practice:
+        if not nums:
+            return 0
+        n = len(nums)
+        rank = [float('inf')] * (n + 1)
+        rank[0] = float('-inf')
+
+        longest = 0
+        for num in nums:
+            index = self.gte(rank, num)
+            rank[index] = num
+            longest = max(longest, index)
+        return longest
+
+    def gte(self, nums, target):
+        start = 0
+        end = len(nums) - 1
+        while start + 1 < end:
+            mid = (start + end) // 2
+            if nums[mid] < target:
+                start = mid
+            else:
+                end = mid
+
+        if nums[start] == target:
+            return start
+        return end
+
         ### DP: O(n^2)
         if not nums:
             return 0

@@ -7,6 +7,17 @@ class Solution:
     """
     def minimumTotal(self, triangle):
         # write your code here
+        ## Practice:
+        m = len(triangle)
+
+        for i in range(m - 2, -1, -1):
+            for j in range(i + 1):
+                triangle[i][j] += min(triangle[i + 1][j], triangle[i + 1][j + 1])
+
+        return triangle[0][0]
+
+
+        ###
         return self.divideConquer(triangle, 0, 0, {})
 
     def divideConquer(self, triangle, x, y, memo):
