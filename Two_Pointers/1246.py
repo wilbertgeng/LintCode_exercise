@@ -8,10 +8,28 @@ class Solution:
     """
     def characterReplacement(self, s, k):
         # write your code here
-        
+        d = {}
+        cnt = 0
 
+        n = len(s)
+        if not s:
+            return 0
+        j = 0
+        longest = 1
+        max_freq = 0
+        for i in range(n):
+            while j < n and j - i - max_freq <= k:
+                d[s[j]] = d.get(s[j], 0) + 1
+                max_freq = max(max_freq, d[s[j]])
+                j += 1
+            if j - i - max_freq > k:
+                longest = max(longest, j - i - 1)
+            if j - i - max_freq <= k:
+                longest = max(longest, j - i )
+            d[s[i]] -= 1
+            max_freq = max(d.values())
 
-
+        return longest
 
 
 
