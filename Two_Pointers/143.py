@@ -9,6 +9,48 @@ class Solution:
     """
     def sortColors2(self, colors, k):
         # write your code here
+        for i in range(1, k + 1):
+            l = 0
+            r = len(colors) - 1
+            while l <= r:
+                while l <= r and colors[l] <= i:
+                    l += 1
+                while l <= r and colors[r] > i:
+                    r -= 1
+                if l <= r:
+                    colors[l], colors[r] = colors[r], colors[l]
+                    l += 1
+                    r -= 1
+
+        #####
+        self.partition(colors, 1, k, 0, len(colors) - 1)
+
+    def partition(self, colors, color_from, color_to, idx_from, idx_to):
+        if color_from == color_to or idx_from == idx_to:
+            return
+        color = (color_from + color_to) // 2
+        left = idx_from
+        right = idx_to
+        while idx_from <= idx_to:
+            while idx_from <= idx_to and colors[idx_from] <= color:
+                idx_from += 1
+            while idx_from <= idx_to and colors[idx_to] > color:
+                idx_to -= 1
+
+            if idx_from <= idx_to:
+                colors[idx_from], colors[idx_to] = colors[idx_to], colors[idx_from]
+                idx_from += 1
+                idx_to -= 1
+
+        self.partition(colors, color_from, color, left, idx_from)
+        self.partition(colors, color + 1, color_to, idx_to, right)
+
+
+
+
+
+
+
         ## k次partition，每次划分出一种颜色	O(nk)	O(1)
         for i in range(1, k + 1):
             left = 0

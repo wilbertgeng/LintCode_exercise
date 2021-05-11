@@ -8,7 +8,21 @@ class Solution:
     """
     def twoSum7(self, nums, target):
         # write your code here
+        if not nums:
+            return [-1, -1]
 
+        n = len(nums)
+        target = abs(target)
+        j = 0
+        for i in range(n):
+            if i == j:
+                j += 1
+            while j < n and nums[j] - nums[i] < target:
+                j += 1
+            if nums[j] - nums[i] == target:
+                return [nums[i], nums[j]]
+
+        return [-1, -1]
 
         ####
         if not nums:
