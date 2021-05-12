@@ -14,6 +14,8 @@ class Solution:
     """
     def findFirstBadVersion(self, n):
         # write your code here
+
+        #######
         start = 1
         end = n
 
@@ -27,6 +29,6 @@ class Solution:
         if SVNRepo.isBadVersion(start):
             return start
         if SVNRepo.isBadVersion(end):
-            return end 
+            return end
 
         return -1

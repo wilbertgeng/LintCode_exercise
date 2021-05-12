@@ -8,6 +8,19 @@ class Solution:
     """
     def intersection(self, nums1, nums2):
         # write your code here
+        ## Practice：
+        m = len(nums1)
+        n = len(nums2)
+
+        dict1 = set(nums1)
+
+        res = set()
+        for num in nums2:
+            if num in dict1:
+                res.add(num)
+
+        return list(res)
+
         ## O(n)
         m = len(nums1)
         n = len(nums2)
@@ -26,4 +39,3 @@ class Solution:
 
 
         # sort + two pointers
-        
