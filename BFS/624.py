@@ -8,6 +8,32 @@ class Solution:
     """
     def minLength(self, s, dict):
         # write your code here
+        ### Practice:
+        shortest = len(s)
+        if not s:
+            return 0
+
+        queue = collections.deque([s])
+        visited = set()
+        visited.add(s)
+
+        while queue:
+            string = queue.popleft()
+            for w in dict:
+                idx = string.find(w)
+                while idx != -1:
+                    string_new = string[:idx] + string[idx + len(w):]
+                    if string_new not in visited:
+                        shortest = min(shortest, len(string_new))
+                        queue.append(string_new)
+                        visited.add(string_new)
+                        idx = string.find(w, idx + 1)
+
+        return shortest
+
+
+
+        #####
         queue = collections.deque([s])
         visited = set()
         visited.add(s)

@@ -16,6 +16,25 @@ class Solution:
     """
     def lowestCommonAncestor(self, root, p, q):
         # write your code here
+        ## Practice:
+        if not root:
+            return None
+        if p.val < q.val:
+            return self.dfs(root, p, q)
+        return self.dfs(root, q, p)
+
+    def dfs(self, node, p, q):
+        if not node:
+            return None
+
+        if p.val <= node.val <= q.val:
+            return node
+        if node.val < p.val:
+            return self.dfs(node.right, p, q)
+        return self.dfs(node.left, p, q)
+
+
+        ####
         if p.val < q.val:
             return self.dfs(root, p, q)
         return self.dfs(root, q, p)

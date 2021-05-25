@@ -15,6 +15,10 @@ class Solution:
     """
     def levelOrder(self, root):
         # write your code here
+        ### Practice:
+        
+
+
         # single queue
         if not root:
             return []
@@ -49,4 +53,4 @@ class Solution:
                     next_queue.append(node.right)
             queue = next_queue
 
-        return res 
+        return res

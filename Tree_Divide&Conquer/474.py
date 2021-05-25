@@ -18,6 +18,21 @@ class Solution:
     """
     def lowestCommonAncestorII(self, root, A, B):
         # write your code here
+        ## Practice:
+        A_parents = set()
+        A_parents.add(A)
+        while A != root:
+            A = A.parent
+            A_parents.add(A)
+
+        while B:
+            if B in A_parents:
+                return B
+            B = B.parent
+        return None
+
+
+        ####
         mapA = set()
         mapA.add(A)
         while A != root:

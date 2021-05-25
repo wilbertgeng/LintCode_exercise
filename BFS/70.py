@@ -17,6 +17,29 @@ class Solution:
         if not root:
             return []
 
+        res = []
+        queue = collections.deque([root])
+
+        while queue:
+            temp = []
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                temp.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+
+            res.append(temp)
+
+        return res[::-1]
+
+
+
+        ###
+        if not root:
+            return []
+
         queue = [[root]]
         index = 0
         res = [[root.val]]

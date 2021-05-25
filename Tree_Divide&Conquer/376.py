@@ -16,6 +16,29 @@ class Solution:
     """
     def binaryTreePathSum(self, root, target):
         # write your code here
+        ## Practice:
+        if not root:
+            return []
+
+        res = []
+        self.dfs(root, target, [root.val], res, root.val)
+        return res
+
+    def dfs(self, node, target, path, res, path_sum):
+        if not node.left and not node.right and path_sum == target:
+            res.append(list(path))
+            return
+        if node.left:
+            path.append(node.left.val)
+            self.dfs(node.left, target, path, res, path_sum + node.left.val)
+            path.pop()
+        if node.right:
+            path.append(node.right.val)
+            self.dfs(node.right, target, path, res, path_sum + node.right.val)
+            path.pop()
+
+
+        ###
         if not root:
             return []
 

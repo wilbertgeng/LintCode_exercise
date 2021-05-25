@@ -9,6 +9,71 @@ class Solution:
         # # write your code here
         start = self.matrixToString(init_state)
         end = self.matrixToString(final_state)
+        visited = set()
+        visited.add(start)
+        if start == end:
+            return 0
+
+        queue = collections.deque([start])
+
+        steps = 0
+
+        while queue:
+            steps += 1
+            for _ in range(len(queue)):
+                state = queue.popleft()
+                for state_n in self.findNext(state, visited):
+                    if state_n == end:
+                        return steps
+                    if state_n not in visited:
+                        visited.add(state_n)
+                        queue.append(state_n)
+
+        return -1
+
+    def findNext(self, state, visited):
+        states = []
+        index = state.find("0")
+        idx_x, idx_y = index // 3, index % 3
+        for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+            x = idx_x + dx
+            y = idx_y + dy
+            if 0 <= x < 3 and 0 <= y < 3:
+                pos = x * 3 + y
+                state_new = list(state)
+                state_new[index], state_new[pos] = state_new[pos], state_new[index]
+                state_new = "".join(state_new)
+                if state_new not in visited:
+                    states.append(state_new)
+
+        return states
+
+    def matrixToString(self, matrix):
+        string = ""
+        for i in range(3):
+            for j in range(3):
+                string += str(matrix[i][j])
+
+        return string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #####
+        start = self.matrixToString(init_state)
+        end = self.matrixToString(final_state)
 
         queue = collections.deque([(start, 0)])
         visited = set()
@@ -41,7 +106,7 @@ class Solution:
                 state_new = "".join(state_new)
                 states.append(state_new)
 
-        return states    
+        return states
 
     def matrixToString(self, state):
         m = len(state)

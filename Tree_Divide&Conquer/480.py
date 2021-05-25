@@ -14,6 +14,26 @@ class Solution:
     """
     def binaryTreePaths(self, root):
         # write your code here
+        ## Practice:
+        if not root:
+            return []
+
+        res = []
+        self.dfs(root, [str(root.val)], res)
+        return res
+
+    def dfs(self, node, path, res):
+        if not node.left and not node.right:
+            path_str = "->".join(path)
+            res.append(path_str)
+            return
+
+        if node.left:
+            self.dfs(node.left, path + [str(node.left.val)], res)
+        if node.right:
+            self.dfs(node.right, path + [str(node.right.val)], res)
+
+        #####
         if not root:
             return []
 
@@ -30,7 +50,7 @@ class Solution:
             paths.append('->'.join([str(n) for n in path]))
             return
 
-        if node.left: ## !! .val doesn't work with None type 
+        if node.left: ## !! .val doesn't work with None type
             path.append(node.left.val)
             self.findPaths(node.left, path, paths)
             path.pop()

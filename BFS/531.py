@@ -17,6 +17,32 @@ class Solution:
     """
     def sixDegrees(self, graph, s, t):
         # write your code here
+        ## Practice:
+        steps = 0
+        visited = set()
+
+        if s == t or not graph:
+            return 0
+
+        visited.add(s)
+        queue = collections.deque([s])
+
+        while queue:
+            steps += 1
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                for node_n in node.neighbors:
+                    if node_n == t:
+                        return steps
+                    if node_n not in visited:
+                        visited.add(node_n)
+                        queue.append(node_n)
+        return -1
+
+
+
+
+        ##
         if s == t or not graph:
             return 0
 

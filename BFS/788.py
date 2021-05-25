@@ -9,6 +9,38 @@ class Solution:
     """
     def shortestDistance(self, maze, start, destination):
         # write your code here
+        ## Practice:
+        m = len(maze)
+        n = len(maze[0])
+        steps = {tuple(start): 0}
+        queue = collections.deque([tuple(start)])
+
+        while queue:
+            i, j = queue.popleft()
+            for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                x = i + dx
+                y = j + dy
+                while 0 <= x < m and 0 <= y < n and maze[x][y] != 1:
+                    x += dx
+                    y += dy
+                x -= dx
+                y -= dy
+                if maze[x][y] == 0:
+                    if (x, y) in steps and steps[(x, y)] > steps[(i, j)] + (abs(x - i) + abs(y - j)):
+                        steps[(x, y)] = steps[(i, j)] + (abs(x - i) + abs(y - j))
+                        queue.append((x, y))
+                    if (x, y) not in steps:
+                        steps[(x, y)] = steps[(i, j)] + (abs(x - i) + abs(y - j))
+                        queue.append((x, y))
+
+        if tuple(destination) in steps:
+            return steps[tuple(destination)]
+        return -1
+
+
+
+
+        ####
         m = len(maze)
         n = len(maze[0])
         queue = collections.deque([tuple(start)])

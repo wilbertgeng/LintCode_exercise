@@ -8,6 +8,33 @@ class Solution:
     """
     def hasPath(self, maze, start, destination):
         # write your code here
+        ## Practice:
+        m = len(maze)
+        n = len(maze[0])
+        visited = set()
+        queue = collections.deque([tuple(start)])
+
+        while queue:
+            i, j = queue.popleft()
+            for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                x = i + dx
+                y = j + dy
+                while 0 <= x < m and 0 <= y < n and maze[x][y] != 1:
+                    x += dx
+                    y += dy
+                x -= dx
+                y -= dy
+                if maze[x][y] == 0 and (x, y) not in visited:
+                    if (x, y) == tuple(destination):
+                        return True
+                    visited.add((x, y))
+                    queue.append((x, y))
+
+        return False
+
+
+
+        ####
         queue = collections.deque([(start[0], start[1])])
         visited = set()
         m = len(maze)
