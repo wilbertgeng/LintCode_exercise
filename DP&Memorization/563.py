@@ -10,6 +10,26 @@ class Solution:
     def backPackV(self, nums, target):
         # write your code here
         m = len(nums)
+        dp = [0] * (target + 1)
+
+        dp[0] = 1
+
+        for i in range(m):
+            for j in range(target, -1, -1):
+                if j < nums[i]:
+                    break
+                dp[j] += dp[j - nums[i]]
+
+        return dp[-1]
+
+
+
+
+
+
+
+        ###
+        m = len(nums)
 
         dp = [0] * (target + 1)
         dp[0] = 1

@@ -8,6 +8,22 @@ class Solution:
     """
     def backPack(self, m, A):
         # write your code here
+        dp = [False] * (m + 1)
+        dp[0] = True
+
+        ans = 0
+        for item in A:
+            for j in range(m, -1, -1):
+                if j - item < 0:
+                    break
+                dp[j] = dp[j] or dp[j - item]
+                if dp[j]:
+                    ans = max(ans, j)
+
+        return ans
+
+
+        ###
         dp = [0] * (m + 1)
 
         dp[0] = 1

@@ -8,6 +8,12 @@ class Solution:
     """
     def findMin(self, nums):
         # write your code here
+        
+
+
+
+
+        ###
         target = sum(nums) // 2
         n = len(nums)
 
@@ -24,6 +30,6 @@ class Solution:
 
         for j in range(target, -1, -1):
             if dp[n % 2][j] == True:
-                return (sum(nums) - 2 * j) ## !!! Becareful what value needs to be returned 
+                return (sum(nums) - 2 * j) ## !!! Becareful what value needs to be returned
 
         return -1

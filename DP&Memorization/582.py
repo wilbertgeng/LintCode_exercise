@@ -8,6 +8,34 @@ class Solution:
     """
     def wordBreak(self, s, wordDict):
         # write your code here
+        return self.dfs(0, s, wordDict, {})
+
+    def dfs(self, idx, s, dict, memo):
+        if idx == len(s):
+            return []
+        if s[idx:] in memo:
+            return memo[s[idx:]]
+
+        res = []
+        path = ""
+
+        for i in range(idx, len(s)):
+            if s[idx: i + 1] not in dict:
+                continue
+            prefixes = self.dfs(i + 1, s, dict, memo)
+            path = s[idx: i + 1]
+            for prefix in prefixes:
+                res.append(path + " " + prefix)
+
+        if s[idx:] in dict:
+            res.append(s[idx:])
+
+        memo[s[idx:]] = res
+        return res
+
+
+
+
         ### Practice:
         return self.dfs(0, s, wordDict, {})
 
@@ -28,7 +56,7 @@ class Solution:
         if s[idx:] in dict:
             res.append(s[idx:]) ## !!
 
-        memo[s[idx:]] = res 
+        memo[s[idx:]] = res
 
         return res
 
